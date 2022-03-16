@@ -1,3 +1,4 @@
+import os.path
 
 nytimes_com = '''
 This New Liquid Is Magnetic, and Mesmerizing
@@ -35,12 +36,59 @@ Twitter and Square Chief Executive Officer Jack Dorsey
 '''
 
 # ------------------------------------------------STAGE 1------------------------------------------------
+# available_sites = {'nytimes.com': nytimes_com, 'bloomberg.com': bloomberg_com}
+#
+#
+# while True:
+#     inp = input()
+#     if inp == 'exit':
+#         break
+#     if inp in available_sites.keys():
+#         print(available_sites[inp])
+
+# ------------------------------------------------STAGE 2------------------------------------------------
+import sys
+
+
+def check_url(cmd):
+    if cmd == 'exit':
+        sys.exit()
+    if cmd in available_sites.keys():
+        print(available_sites[cmd])
+        file_name = cmd.rpartition('.')[0]
+        with open(os.path.join(directory, file_name), 'w', encoding='utf-8') as writer:
+            writer.write(available_sites[cmd])
+    else:
+        print("Error: Invalid http address")
+
+
+def check_file(cmd):
+    if cmd == 'exit':
+        sys.exit()
+    if os.path.isfile(os.path.join(directory, cmd)):
+        with open(os.path.join(directory, cmd), 'r', encoding='utf-8') as reader:
+            res = reader.read()
+        print(res)
+    else:
+        check_url(cmd)
+
+
 available_sites = {'nytimes.com': nytimes_com, 'bloomberg.com': bloomberg_com}
 
+args = sys.argv
+if len(args) == 1:
+    directory = '.'
+else:
+    dir_name = args[1]
+    if not os.path.isdir(dir_name):
+        os.mkdir(dir_name)
+    directory = f'./{dir_name}'
 
-while True:
-    inp = input()
-    if inp == 'exit':
-        break
-    if inp in available_sites.keys():
-        print(available_sites[inp])
+# print(directory)
+
+inp1 = input()
+check_url(inp1)
+
+inp2 = input()
+check_file(inp2)
+
