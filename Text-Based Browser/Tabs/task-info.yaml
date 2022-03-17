@@ -160,9 +160,9 @@ files:
 - name: 1/nytimes
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/projects/79/stages/437/implement#comment
+feedback_link: https://hyperskill.org/learn/step/7211#comment
 status: Solved
 feedback:
   message: Congratulations!
   time: Wed, 16 Mar 2022 21:37:02 UTC
-record: -1
+record: 2

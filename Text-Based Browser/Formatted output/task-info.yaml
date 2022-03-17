@@ -156,6 +156,6 @@ files:
 
     TextBasedBrowserTest().run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/79/stages/441/implement#comment
+feedback_link: https://hyperskill.org/learn/step/7215#comment
 status: Unchecked
 record: -1

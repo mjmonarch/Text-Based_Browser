@@ -47,24 +47,67 @@ Twitter and Square Chief Executive Officer Jack Dorsey
 #         print(available_sites[inp])
 
 # ------------------------------------------------STAGE 2------------------------------------------------
+# import sys
+#
+#
+# def check_url(cmd):
+#     if cmd == 'exit':
+#         sys.exit()
+#     if cmd in available_sites.keys():
+#         print(available_sites[cmd])
+#         file_name = cmd.rpartition('.')[0]
+#         with open(os.path.join(directory, file_name), 'w', encoding='utf-8') as writer:
+#             writer.write(available_sites[cmd])
+#     else:
+#         print("Error: Invalid http address")
+#
+#
+# def check_file(cmd):
+#     if cmd == 'exit':
+#         sys.exit()
+#     if os.path.isfile(os.path.join(directory, cmd)):
+#         with open(os.path.join(directory, cmd), 'r', encoding='utf-8') as reader:
+#             res = reader.read()
+#         print(res)
+#     else:
+#         check_url(cmd)
+#
+#
+# available_sites = {'nytimes.com': nytimes_com, 'bloomberg.com': bloomberg_com}
+#
+# args = sys.argv
+# if len(args) == 1:
+#     directory = '.'
+# else:
+#     dir_name = args[1]
+#     if not os.path.isdir(dir_name):
+#         os.mkdir(dir_name)
+#     directory = f'./{dir_name}'
+#
+# # print(directory)
+#
+# inp1 = input()
+# check_url(inp1)
+#
+# inp2 = input()
+# check_file(inp2)
+
+# ------------------------------------------------STAGE 3------------------------------------------------
 import sys
 
 
 def check_url(cmd):
-    if cmd == 'exit':
-        sys.exit()
     if cmd in available_sites.keys():
         print(available_sites[cmd])
         file_name = cmd.rpartition('.')[0]
         with open(os.path.join(directory, file_name), 'w', encoding='utf-8') as writer:
             writer.write(available_sites[cmd])
+        stack.append(file_name)
     else:
         print("Error: Invalid http address")
 
 
 def check_file(cmd):
-    if cmd == 'exit':
-        sys.exit()
     if os.path.isfile(os.path.join(directory, cmd)):
         with open(os.path.join(directory, cmd), 'r', encoding='utf-8') as reader:
             res = reader.read()
@@ -74,6 +117,8 @@ def check_file(cmd):
 
 
 available_sites = {'nytimes.com': nytimes_com, 'bloomberg.com': bloomberg_com}
+stack = []
+last_file = ""
 
 args = sys.argv
 if len(args) == 1:
@@ -84,11 +129,22 @@ else:
         os.mkdir(dir_name)
     directory = f'./{dir_name}'
 
-# print(directory)
-
-inp1 = input()
-check_url(inp1)
-
-inp2 = input()
-check_file(inp2)
+inp = input()
+if inp == "exit":
+    sys.exit()
+check_url(inp)
+inp = input()
+while inp != "exit":
+    if inp == "back":
+        try:
+            stack.pop()
+            file = stack[-1]
+            with open(os.path.join(directory, file), 'r', encoding='utf-8') as reader:
+                res = reader.read()
+            print(res)
+        except IndexError:
+            pass
+    else:
+        check_file(inp)
+    inp = input()
 

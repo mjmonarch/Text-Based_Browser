@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: <code>d.append()</code>, <code>d.appendleft()</code>, <code>d.pop()</code>,
+    <code>d.popleft()</code>
+- text: <code>d.appendleft()</code> and <code>d.popleft()</code>
+- text: <code>d.append()</code> and <code>d.pop()</code>
+- text: <code>d.push()</code>, <code>d.pop()</code>, <code>d.peek()</code>
+files:
+- name: main.py
+  visible: true
+  text: |+
+    #  You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14589#comment
+status: Solved
+record: -1
