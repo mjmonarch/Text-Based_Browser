@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: Starting at the top line
+- text: Starting with the location of the executable file
+- text: Starting at the bottom line
+files:
+- name: main.py
+  visible: true
+  text: |+
+    #  You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11711#comment
+status: Solved
+record: -1

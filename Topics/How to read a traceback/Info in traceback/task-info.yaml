@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: ' The detailed explanation why the mistake has happened.'
+- text: The number of the line where something went wrong.
+- text: The path to the file where the mistake was raised.
+- text: The name of the exception raised.
+- text: The line that triggered the exception.
+files:
+- name: main.py
+  visible: true
+  text: |+
+    #  You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14993#comment
+status: Solved
+record: -1

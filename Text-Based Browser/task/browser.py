@@ -149,19 +149,83 @@ Twitter and Square Chief Executive Officer Jack Dorsey
 #     inp = input()
 
 # ------------------------------------------------STAGE 4------------------------------------------------
+# import sys
+# import requests
+#
+#
+# def check_url(url):
+#     if url[:8] != "https://":
+#         url = "https://" + url
+#     r = requests.get(url)
+#     print(r.text)
+#     file_name = url.rpartition('.')[0]
+#     with open(os.path.join(directory, file_name[8:]), 'w', encoding='utf-8') as writer:
+#         writer.write(r.text)
+#     stack.append(file_name[8:])
+#
+#
+# def check_file(cmd):
+#     if os.path.isfile(os.path.join(directory, cmd)):
+#         with open(os.path.join(directory, cmd), 'r', encoding='utf-8') as reader:
+#             res = reader.read()
+#         print(res)
+#     else:
+#         check_url(cmd)
+#
+#
+# stack = []
+# last_file = ""
+#
+# args = sys.argv
+# if len(args) == 1:
+#     directory = '.'
+# else:
+#     dir_name = args[1]
+#     if not os.path.isdir(dir_name):
+#         os.mkdir(dir_name)
+#     directory = f'./{dir_name}'
+#
+# inp = input()
+# if inp == "exit":
+#     sys.exit()
+# check_url(inp)
+# inp = input()
+# while inp != "exit":
+#     if inp == "back":
+#         try:
+#             stack.pop()
+#             file = stack[-1]
+#             with open(os.path.join(directory, file), 'r', encoding='utf-8') as reader:
+#                 res = reader.read()
+#             print(res)
+#         except IndexError:
+#             pass
+#     else:
+#         check_file(inp)
+#     inp = input()
+
+# ------------------------------------------------STAGE 5------------------------------------------------
 import sys
 import requests
+from bs4 import BeautifulSoup
 
 
 def check_url(url):
     if url[:8] != "https://":
         url = "https://" + url
-    r = requests.get(url)
-    print(r.text)
-    file_name = url.rpartition('.')[0]
-    with open(os.path.join(directory, file_name[8:]), 'w', encoding='utf-8') as writer:
-        writer.write(r.text)
-    stack.append(file_name[8:])
+    try:
+        r = requests.get(url)
+        if r.status_code != 200:
+            print("Incorrect URL")
+        else:
+            soup = BeautifulSoup(r.content, 'html.parser')
+            print(soup.getText())
+            file_name = url.rpartition('.')[0]
+            with open(os.path.join(directory, file_name[8:]), 'w', encoding='utf-8') as writer:
+                writer.write(soup.getText())
+            stack.append(file_name[8:])
+    except requests.exceptions.ConnectionError:
+        print("Incorrect URL")
 
 
 def check_file(cmd):
