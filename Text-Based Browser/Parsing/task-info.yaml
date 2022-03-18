@@ -172,9 +172,6 @@ files:
 - name: 1/docs.python
   visible: true
   learner_created: true
-- name: tb_tabs/ikea
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7214#comment
 status: Solved
 feedback:
