@@ -268,7 +268,7 @@ Twitter and Square Chief Executive Officer Jack Dorsey
 #         check_file(inp)
 #     inp = input()
 
-# ------------------------------------------------STAGE 5------------------------------------------------
+# ------------------------------------------------STAGE 6------------------------------------------------
 import sys
 import requests
 from bs4 import BeautifulSoup
@@ -286,10 +286,16 @@ def check_url(url):
             soup = BeautifulSoup(r.content, 'html.parser')
             for a in soup.find_all('a'):
                 a.string = "".join([Fore.BLUE, a.get_text(), Fore.RESET])
-            print(soup.getText())
+            tag_list = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'ul', 'ol', 'li']
+            tags = soup.find_all(tag_list)
+            output = ''
+            for tag in tags:
+                if tag.text != '':
+                    output += tag.text + '\n'
+            print(output)
             file_name = url.rpartition('.')[0]
             with open(os.path.join(directory, file_name[8:]), 'w', encoding='utf-8') as writer:
-                writer.write(soup.getText())
+                writer.write(output)
             stack.append(file_name[8:])
     except requests.exceptions.ConnectionError:
         print("Incorrect URL")
